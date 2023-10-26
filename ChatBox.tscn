@@ -1,0 +1,82 @@
+[gd_scene load_steps=10 format=3 uid="uid://b3tpjaxhqm656"]
+
+[ext_resource type="Script" path="res://ChatBox.gd" id="1_ywd4g"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_42kjs"]
+bg_color = Color(0.101961, 0.121569, 0.176471, 1)
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_uer5r"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_1nr6o"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_5hudd"]
+bg_color = Color(0.196078, 0.231373, 0.32549, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_c3gfb"]
+bg_color = Color(0.392157, 0.427451, 0.6, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_phw3r"]
+bg_color = Color(0.27451, 0.380392, 0.6, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_3ep75"]
+bg_color = Color(0.27451, 0.380392, 0.6, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_jcjsa"]
+bg_color = Color(0.431373, 0.643137, 0.65098, 1)
+
+[node name="ChatBox" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_ywd4g")
+
+[node name="Background" type="Panel" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_42kjs")
+
+[node name="VBOX" type="VBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Text" type="RichTextLabel" parent="VBOX"]
+layout_mode = 2
+size_flags_vertical = 3
+focus_mode = 2
+theme_override_styles/focus = SubResource("StyleBoxEmpty_uer5r")
+theme_override_styles/normal = SubResource("StyleBoxEmpty_1nr6o")
+scroll_following = true
+selection_enabled = true
+text_direction = 1
+
+[node name="HBOX" type="HBoxContainer" parent="VBOX"]
+layout_mode = 2
+
+[node name="ChatBox" type="LineEdit" parent="VBOX/HBOX"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_styles/normal = SubResource("StyleBoxFlat_5hudd")
+theme_override_styles/focus = SubResource("StyleBoxFlat_c3gfb")
+
+[node name="SendButton" type="Button" parent="VBOX/HBOX"]
+custom_minimum_size = Vector2(96, 0)
+layout_mode = 2
+focus_mode = 0
+theme_override_styles/normal = SubResource("StyleBoxFlat_phw3r")
+theme_override_styles/hover = SubResource("StyleBoxFlat_3ep75")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_jcjsa")
+theme_override_styles/focus = SubResource("StyleBoxFlat_phw3r")
+text = "Send"
+
+[connection signal="pressed" from="VBOX/HBOX/SendButton" to="." method="_on_send_button_pressed"]

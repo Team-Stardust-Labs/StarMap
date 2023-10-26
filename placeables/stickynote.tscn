@@ -1,0 +1,257 @@
+[gd_scene load_steps=12 format=3 uid="uid://dur5ew6eu8xlo"]
+
+[ext_resource type="Script" path="res://placeables/stickynote.gd" id="1_ssol7"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_cqbsx"]
+bg_color = Color(0.6, 0.384314, 0.282353, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.372549, 0.262745, 0.207843, 1)
+border_blend = true
+corner_radius_top_left = 2
+corner_radius_top_right = 2
+corner_radius_bottom_right = 2
+corner_radius_bottom_left = 2
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_rqfu7"]
+bg_color = Color(0.258824, 0.443137, 0.6, 0.627451)
+expand_margin_top = 32.0
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_c34dt"]
+content_margin_left = 16.0
+content_margin_top = 16.0
+content_margin_right = 16.0
+content_margin_bottom = 16.0
+bg_color = Color(0.133333, 0.145098, 0.196078, 0.670588)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0.8, 0.8, 0.8, 0.439216)
+
+[sub_resource type="InputEventKey" id="InputEventKey_bhbju"]
+device = -1
+shift_pressed = true
+keycode = 4194309
+
+[sub_resource type="Shortcut" id="Shortcut_b8deu"]
+events = [SubResource("InputEventKey_bhbju")]
+
+[sub_resource type="LabelSettings" id="LabelSettings_rd7hk"]
+line_spacing = 0.0
+outline_size = 3
+outline_color = Color(0, 0, 0, 1)
+
+[sub_resource type="Animation" id="Animation_bddj4"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(1, 1)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [1.39626]
+}
+
+[sub_resource type="Animation" id="Animation_1bys1"]
+resource_name = "delete"
+length = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(1, 1), Vector2(1e-05, 1e-05)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0.0, 1.39626]
+}
+tracks/2/type = "method"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath(".")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0.1),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"queue_free"
+}]
+}
+
+[sub_resource type="Animation" id="Animation_iqqln"]
+resource_name = "popup"
+length = 0.2
+step = 0.05
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:scale")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector2(1e-05, 1e-05), Vector2(1.2, 1.2), Vector2(1, 1)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:rotation")
+tracks/1/interp = 3
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.15, 0.2),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [-0.174533, 0.0872665, 0.0]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_e37cm"]
+_data = {
+"RESET": SubResource("Animation_bddj4"),
+"delete": SubResource("Animation_1bys1"),
+"popup": SubResource("Animation_iqqln")
+}
+
+[node name="stickynote" type="Control"]
+layout_mode = 3
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+grow_horizontal = 2
+grow_vertical = 2
+rotation = 1.39626
+script = ExtResource("1_ssol7")
+
+[node name="Panel" type="Panel" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -93.0
+offset_top = -89.0
+offset_right = 93.0
+offset_bottom = 89.0
+grow_horizontal = 2
+grow_vertical = 2
+tooltip_text = "LeftClick to move
+Shift+RightClick to delete"
+mouse_default_cursor_shape = 6
+theme_override_styles/panel = SubResource("StyleBoxFlat_cqbsx")
+
+[node name="Popup" type="Window" parent="Panel"]
+transparent_bg = true
+title = "Edit Note"
+initial_position = 1
+size = Vector2i(512, 384)
+visible = false
+wrap_controls = true
+transient = true
+transparent = true
+popup_window = true
+theme_override_styles/embedded_border = SubResource("StyleBoxFlat_rqfu7")
+
+[node name="Vbox" type="VBoxContainer" parent="Panel/Popup"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Text" type="TextEdit" parent="Panel/Popup/Vbox"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_styles/normal = SubResource("StyleBoxFlat_c34dt")
+theme_override_styles/focus = SubResource("StyleBoxFlat_c34dt")
+context_menu_enabled = false
+virtual_keyboard_enabled = false
+middle_mouse_paste_enabled = false
+wrap_mode = 1
+
+[node name="Hbox" type="HBoxContainer" parent="Panel/Popup/Vbox"]
+layout_mode = 2
+
+[node name="Delete" type="Button" parent="Panel/Popup/Vbox/Hbox"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Delete Note"
+
+[node name="Apply" type="Button" parent="Panel/Popup/Vbox/Hbox"]
+layout_mode = 2
+size_flags_horizontal = 3
+shortcut = SubResource("Shortcut_b8deu")
+text = "Apply and Close"
+
+[node name="Label" type="Label" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -80.0
+offset_top = -65.0
+offset_right = 80.0
+offset_bottom = 65.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 1
+mouse_default_cursor_shape = 1
+text = "Sticky Note!"
+label_settings = SubResource("LabelSettings_rd7hk")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="noteAnim" type="AnimationPlayer" parent="."]
+autoplay = "popup"
+libraries = {
+"": SubResource("AnimationLibrary_e37cm")
+}
+
+[connection signal="gui_input" from="Panel" to="." method="_on_panel_gui_input"]
+[connection signal="close_requested" from="Panel/Popup" to="." method="_on_popup_close_requested"]
+[connection signal="focus_exited" from="Panel/Popup" to="." method="_on_popup_focus_exited"]
+[connection signal="text_changed" from="Panel/Popup/Vbox/Text" to="." method="_on_text_text_changed"]
+[connection signal="pressed" from="Panel/Popup/Vbox/Hbox/Apply" to="." method="_on_apply_pressed"]
+[connection signal="gui_input" from="Label" to="." method="_on_label_gui_input"]
